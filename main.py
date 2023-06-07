@@ -802,6 +802,9 @@ status = True
 
 #create empty list
 def world_generation():
+    """
+
+    """
     world_data = []
     for row in range(ROWS):
         r = [-1] * COLS
@@ -814,7 +817,7 @@ def world_generation():
     return world_data
 
 world = World()
-player,health_bar = world.process_data(world_generation())
+player, health_bar = world.process_data(world_generation())
 
 while status:
     if start_game == False:
@@ -850,17 +853,20 @@ while status:
             level = 1
             world_data = reset_level()
             world = World()
-            player = world.process_data(world_generation())
+            world_data = world_generation()
+            player, health_bar = world.process_data(world_data)
         if lv2_button.draw(screen):
             level = 2
             world_data = reset_level()
             world = World()
-            player = world.process_data(world_generation())
+            world_data = world_generation()
+            player, health_bar = world.process_data(world_data)
         if lv3_button.draw(screen):
             level = 3
             world_data = reset_level()
             world = World()
-            player = world.process_data(world_generation())
+            world_data = world_generation()
+            player,health_bar = world.process_data(world_data)
         if back_button_lv.draw(screen):
             lv_menu = False
             start_menu = True
@@ -870,8 +876,9 @@ while status:
             start_menu = True
             pause_menu = False
             world_data = reset_level()
+            world_data = world_generation()
             world = World()
-            player = world.process_data(world_generation())
+            player, health_bar = world.process_data(world_data)
         if resume_button_pause.draw(screen):
             pause_menu = False
             start_game = True
@@ -944,14 +951,14 @@ while status:
                 bg_scroll = 0
                 world_data = reset_level()
                 if level <= MAX_LEVEL:
-                    world = World()
-                    player,health_bar = world.process_data(world_generation())
+                    pass
                 else:
                     start_game = False
                     start_menu = True
                     level = 1
-                    world = World()
-                    player,health_bar = world.process_data(world_generation())
+                world_data = world_generation()
+                world = World()
+                player, health_bar = world.process_data(world_data)
         else:
             screen_scroll = 0
             if death_fade.fade():
